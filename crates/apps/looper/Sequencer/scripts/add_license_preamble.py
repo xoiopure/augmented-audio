@@ -24,7 +24,9 @@ def add_preamble(preamble_contents, target):
 
     if "= copyright =====" not in data:
         print(f"  {target} doesn't have contents")
-        commented_contents = "\n".join([("// " + l).strip() for l in preamble_contents.splitlines()])
+        commented_contents = "\n".join(
+            [f"// {l}".strip() for l in preamble_contents.splitlines()]
+        )
         new_data = commented_contents + "\n" + data
         with open(target, 'w') as fh:
             fh.writelines(new_data)

@@ -16,7 +16,7 @@ def main():
         pth = scrate[0]
         crate = scrate[1]
         print('  - package-ecosystem: "cargo"')
-        print('    directory: "%s"' % pth)
+        print(f'    directory: "{pth}"')
         print('    schedule:')
         print('      interval: "daily"')
 
