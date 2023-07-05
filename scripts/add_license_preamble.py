@@ -9,10 +9,7 @@ ignored_files = [
 
 
 def any(param):
-    for el in param:
-        if el:
-            return True
-    return False
+    return any(param)
 
 
 def find_preamble(target):
@@ -48,7 +45,9 @@ def add_preamble(target):
 
     if "Copyright (c)" not in data and "= copyright ==" not in data:
         print(f"  {target} doesn't have contents")
-        commented_contents = "\n".join([("// " + l).strip() for l in preamble_contents.splitlines()])
+        commented_contents = "\n".join(
+            [f"// {l}".strip() for l in preamble_contents.splitlines()]
+        )
         new_data = commented_contents + "\n\n" + data
         print(f"Preamble for {target} found at {preamble_path}")
         with open(target, 'w') as fh:

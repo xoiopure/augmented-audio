@@ -26,13 +26,12 @@ def build_category_readme(category_path):
         return None
     output = ""
 
-    augmented_crates = set([
+    augmented_crates = {
         f
         for f in glob(f"{category_path}/**/Cargo.toml", recursive=True)
         if "target" not in f and "vendor" not in f and "midir" not in f
-    ])
-    augmented_crates = list(augmented_crates)
-    augmented_crates.sort()
+    }
+    augmented_crates = sorted(augmented_crates)
     description = category_descriptions[category]
     output += f"# [**{category}** - {description}]({category})\n\n"
     for crate in augmented_crates:
@@ -48,8 +47,7 @@ def build_category_readme(category_path):
 def build_main_readme():
     categories = glob("./crates/augmented/*")
     categories.sort()
-    output = ""
-    output += "# augmented\n"
+    output = "" + "# augmented\n"
     output += "The augmented audio libraries are separated onto categories:\n\n"
     output += "\n## Summary\n\n"
     for category_path in categories:
@@ -61,13 +59,12 @@ def build_main_readme():
         category = os.path.basename(category_path)
         if category == 'augmented':
             continue
-        augmented_crates = set([
+        augmented_crates = {
             f
             for f in glob(f"{category_path}/**/Cargo.toml", recursive=True)
             if "target" not in f and "vendor" not in f and "midir" not in f
-        ])
-        augmented_crates = list(augmented_crates)
-        augmented_crates.sort()
+        }
+        augmented_crates = sorted(augmented_crates)
         description = category_descriptions[category]
         output += f"* [**{category}** - {description}]({category})\n"
     output += "\n## All crates\n\n"
@@ -80,13 +77,12 @@ def build_main_readme():
         category = os.path.basename(category_path)
         if category == 'augmented':
             continue
-        augmented_crates = set([
+        augmented_crates = {
             f
             for f in glob(f"{category_path}/**/Cargo.toml", recursive=True)
             if "target" not in f and "vendor" not in f and "midir" not in f
-        ])
-        augmented_crates = list(augmented_crates)
-        augmented_crates.sort()
+        }
+        augmented_crates = sorted(augmented_crates)
         description = category_descriptions[category]
         output += f"* [**{category}** - {description}]({category})\n"
         for crate in augmented_crates:
